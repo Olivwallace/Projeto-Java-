@@ -15,6 +15,7 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
      */
     public TelaCadastroProduto() {
         initComponents();
+        
     }
 
     /**

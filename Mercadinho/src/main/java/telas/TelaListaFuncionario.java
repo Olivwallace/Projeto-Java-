@@ -6,8 +6,7 @@ package telas;
 
 import classes.Funcionarios;
 import conexaoClasse.FuncionariosDAO;
-import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -22,8 +21,8 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
      */
     public TelaListaFuncionario() {
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel)TableFun.getModel();
-        TableFun.setRowSorter(new TableRowSorter(modelo));
+        DefaultTableModel modelo = (DefaultTableModel)TableListFun.getModel();
+        TableListFun.setRowSorter(new TableRowSorter(modelo));
         LerTabela();
         
     }
@@ -49,7 +48,10 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jToolBar2 = new javax.swing.JToolBar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableFun = new javax.swing.JTable();
+        TableListFun = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        ExcluiFuncionario = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setTitle("Mercearia GMW");
 
@@ -141,30 +143,50 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
 
         jToolBar2.setRollover(true);
 
-        TableFun.setModel(new javax.swing.table.DefaultTableModel(
+        TableListFun.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome:", "Matricula", "Cargo", "Salario", "Ações"
+                "Nome:", "Matricula", "Cargo", "Salario"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        TableFun.addContainerListener(new java.awt.event.ContainerAdapter() {
+        TableListFun.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                TableFunComponentAdded(evt);
+                TableListFunComponentAdded(evt);
             }
         });
-        jScrollPane1.setViewportView(TableFun);
+        TableListFun.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableListFunMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TableListFun);
 
-        jToolBar2.add(jScrollPane1);
+        jLabel1.setFont(new java.awt.Font("Constantia", 0, 15)); // NOI18N
+        jLabel1.setText("Gerenciamento de Funcionarios");
+
+        ExcluiFuncionario.setText("Excluir");
+        ExcluiFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluiFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Atualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,66 +194,108 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(227, 227, 227))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(87, 87, 87)
+                .addComponent(ExcluiFuncionario)
+                .addGap(61, 61, 61))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 406, Short.MAX_VALUE)
+                    .addGap(0, 519, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 407, Short.MAX_VALUE)))
+                    .addGap(0, 520, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 406, Short.MAX_VALUE)
+                    .addGap(0, 519, Short.MAX_VALUE)
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 407, Short.MAX_VALUE)))
+                    .addGap(0, 520, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 406, Short.MAX_VALUE)
+                    .addGap(0, 519, Short.MAX_VALUE)
                     .addComponent(jInternalFrame3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 407, Short.MAX_VALUE)))
+                    .addGap(0, 520, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ExcluiFuncionario)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 218, Short.MAX_VALUE)
+                    .addGap(0, 263, Short.MAX_VALUE)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 219, Short.MAX_VALUE)))
+                    .addGap(0, 263, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 218, Short.MAX_VALUE)
+                    .addGap(0, 263, Short.MAX_VALUE)
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 219, Short.MAX_VALUE)))
+                    .addGap(0, 263, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 218, Short.MAX_VALUE)
+                    .addGap(0, 263, Short.MAX_VALUE)
                     .addComponent(jInternalFrame3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 219, Short.MAX_VALUE)))
+                    .addGap(0, 263, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TableFunComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_TableFunComponentAdded
+    private void TableListFunComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_TableListFunComponentAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_TableFunComponentAdded
+    }//GEN-LAST:event_TableListFunComponentAdded
+
+    private void ExcluiFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluiFuncionarioActionPerformed
+        // TODO add your handling code here:
+        
+        if(TableListFun.getSelectedRow() != -1){
+            
+            DefaultTableModel excluir = (DefaultTableModel)TableListFun.getModel();
+            excluir.removeRow(TableListFun.getSelectedRow());
+            JOptionPane.showMessageDialog(null,"Funcionario excluído com sucesso!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir!");
+        }
+    }//GEN-LAST:event_ExcluiFuncionarioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TableListFunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableListFunMouseClicked
+        // TODO add your handling code here:
+        if(TableListFun.getSelectedRow() != -1){
+            
+            
+        }
+    }//GEN-LAST:event_TableListFunMouseClicked
     
     public void LerTabela (){
-        JToolBar Acoes = new JToolBar();
-        JMenuItem Editar = new JMenuItem();
-        JMenuItem Excluir = new JMenuItem();
         
-        Acoes.add(Editar);
-        Acoes.add(Excluir);
-        
-        DefaultTableModel modelo = (DefaultTableModel)TableFun.getModel();
+        DefaultTableModel modelo = (DefaultTableModel)TableListFun.getModel();
         FuncionariosDAO FUN = new FuncionariosDAO();
         for( Funcionarios f: FUN.buscaTodosFuncionarios()){
             modelo.addRow(new Object []{
@@ -239,17 +303,19 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
                 f.getMatricula(),
                 f.getCargo(),
                 f.getSalario(),
-                Acoes
             });
             
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableFun;
+    private javax.swing.JButton ExcluiFuncionario;
+    private javax.swing.JTable TableListFun;
+    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JInternalFrame jInternalFrame3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
