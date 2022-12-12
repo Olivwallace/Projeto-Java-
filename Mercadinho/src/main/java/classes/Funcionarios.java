@@ -25,9 +25,6 @@ public class Funcionarios {
         this.senha = this.getMatricula();
 
     }
-    public Funcionarios(){
-    
-    }
 
     //------------------------------------------ Fim Construtor ----------------------------------------------------//
 
