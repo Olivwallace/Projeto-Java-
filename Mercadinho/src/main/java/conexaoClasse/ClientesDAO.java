@@ -24,8 +24,8 @@ public class ClientesDAO {
         try {
             
             statement = conexao.prepareStatement("INSERT INTO Clientes (CPF, NOME, ENDERECO, SENHA) Values (?, ?, ?, ?)");
-            statement.setString(0, cliente.getCPF());
-            statement.setString(1,cliente.getNome());
+            statement.setString(1, cliente.getCPF());
+            statement.setString(2,cliente.getNome());
             statement.setString(3, cliente.getEndereco());
             statement.setString(4, cliente.getSenha());
             

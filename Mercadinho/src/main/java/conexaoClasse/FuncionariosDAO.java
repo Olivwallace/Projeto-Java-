@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class FuncionariosDAO {
 
     public void cria(Funcionarios funcionario) {
@@ -23,64 +22,68 @@ public class FuncionariosDAO {
         PreparedStatement statement = null;
 
         try {
-            
+
             statement = conexao.prepareStatement("INSERT INTO Funcionarios (matricula, nome, cargo, salario, senha) Values (?, ?, ?, ?, ?)");
             statement.setString(1, funcionario.getMatricula());
             statement.setString(2, funcionario.getNome());
             statement.setString(3, funcionario.getCargo());
             statement.setFloat(4, funcionario.getSalario());
             statement.setString(5, funcionario.getSenha());
-            
+
             statement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Funcionário Salvo Com Sucesso!");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar Funcionário!");
-            
-        }finally{
+
+        } finally {
             Conexao.fecharConexao(conexao, statement);
         }
     }
-    
-    public boolean VerificaLogin (String Matricula, String Senha){
-         Connection conexao = Conexao.getConnection();
-         PreparedStatement statement = null;
-         ResultSet result = null;
 
-         boolean verifica = false;
-         
-         try{
-            statement = conexao.prepareStatement("SELECT * FROM funcionarios WHERE Matricula =? and Senha =?");
+    public Funcionarios VerificaLogin(String Matricula) {
+        Connection conexao = Conexao.getConnection();
+        PreparedStatement statement = null;
+        ResultSet result = null;
+
+        Funcionarios verificado = new Funcionarios();
+
+        try {
+            statement = conexao.prepareStatement("SELECT * FROM funcionarios WHERE Matricula =?");
             statement.setString(1, Matricula);
-            statement.setString(2, Senha);
 
-            result  = statement.executeQuery();
-            
-            if(result.next()){
-            
-                verifica = true;
+            result = statement.executeQuery();
+
+            if (result.next()) {
+
+                verificado.setMatricula(result.getString("Matricula"));
+                verificado.setNome(result.getString("Nome"));
+                verificado.setCargo(result.getString("Cargo"));
+                verificado.setSalario(result.getFloat("Salario"));
+                verificado.setSenha(result.getString("Senha"));
+
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(FuncionariosDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             Conexao.fecharConexao(conexao, statement, result);
         }
 
-        return verifica;
-}
-    
+        return verificado;
+    }
+
     public void AtualizaFuncionario(Funcionarios f) {
 
         Connection conexao = Conexao.getConnection();
         PreparedStatement statement = null;
-        
-       
+
         try {
             statement = conexao.prepareStatement("UPDATE funcionarios SET NOME = ?, CARGO = ?, SALARIO = ? WHERE MATRICULA = ?");
             statement.setString(1, f.getNome());
             statement.setString(2, f.getCargo());
-            statement.setFloat(3, f.getSalario() );
+            statement.setFloat(3, f.getSalario());
             statement.setString(4, f.getMatricula());
+
             statement.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
@@ -91,18 +94,18 @@ public class FuncionariosDAO {
         }
 
     }
-    
+
     public ArrayList<Funcionarios> buscaTodosFuncionarios() {
         Connection conexao = Conexao.getConnection();
         PreparedStatement statement = null;
         ResultSet result = null;
-        ArrayList<Funcionarios> funcionarios = new ArrayList<>(); 
+        ArrayList<Funcionarios> funcionarios = new ArrayList<>();
 
         try {
             statement = conexao.prepareStatement("SELECT * FROM Funcionarios");
             result = statement.executeQuery();
 
-            while(result.next()){
+            while (result.next()) {
                 Funcionarios novo = new Funcionarios();
 
                 novo.setMatricula(result.getString("Matricula"));
@@ -117,18 +120,17 @@ public class FuncionariosDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar Funcionário!");
             Logger.getLogger(FuncionariosDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             Conexao.fecharConexao(conexao, statement, result);
         }
 
         return funcionarios;
     }
 
+    public void ExcluiFuncionario(Funcionarios f) {
 
-public void ExcluiFuncionario(Funcionarios f) {
-
-         Connection conexao = Conexao.getConnection();
-         PreparedStatement statement = null;
+        Connection conexao = Conexao.getConnection();
+        PreparedStatement statement = null;
 
         try {
             statement = conexao.prepareStatement("DELETE FROM funcionarios WHERE Matricula = ?");
@@ -145,8 +147,3 @@ public void ExcluiFuncionario(Funcionarios f) {
 
     }
 }
-
-  
-
-
-
