@@ -6,6 +6,7 @@ package telas;
 
 import classes.Funcionarios;
 import conexaoClasse.FuncionariosDAO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -22,12 +23,15 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
      */
     public TelaCadastroFuncionario() {
         initComponents();
+        getContentPane().setBackground(Color.WHITE);
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
+        TableFun.setBackground(Color.WHITE);
         DefaultTableModel modelo = (DefaultTableModel)TableFun.getModel();
         TableFun.setRowSorter(new TableRowSorter(modelo));
-        LerTabela();
+        LerTabelaFun();
     }                                        
 
-    public void LerTabela (){
+    public void LerTabelaFun (){
         
         DefaultTableModel modelo = (DefaultTableModel)TableFun.getModel();
         modelo.setNumRows(0);
@@ -112,10 +116,19 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
+        jButton4.setBackground(new java.awt.Color(0, 0, 102));
         jButton4.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Cadastrar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +142,9 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 102));
+        jButton1.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Excluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +152,9 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 0, 102));
+        jButton2.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Atualizar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +162,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        TableFun.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         TableFun.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -150,7 +170,15 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             new String [] {
                 "Matricula", "Nome", "Cargo", "Salario", "Senha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TableFun.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TableFunMouseClicked(evt);
@@ -167,78 +195,73 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(48, 48, 48)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel16)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel13)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(354, 354, 354)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)))
-                        .addGap(0, 49, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel11)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel12)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel14)
+                        .addGap(6, 6, 6)
+                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton3)
+                        .addGap(357, 357, 357)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(529, 529, 529)
+                        .addComponent(jLabel13)))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addComponent(jLabel13)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)
+                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel16)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel14))))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
                     .addComponent(jButton1)
+                    .addComponent(jButton4)
                     .addComponent(jButton2))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,7 +300,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
             txtCargo.setText("");
             txtSalario.setText("");
 
-            LerTabela();
+            LerTabelaFun();
 
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto para excluir.");
@@ -305,7 +328,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
            txtSenha.setText("");
           
 
-            LerTabela();
+            LerTabelaFun();
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -328,7 +351,7 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         txtSalario.setText("");
         txtSenha.setText("");
         
-        LerTabela();
+        LerTabelaFun();
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -336,11 +359,11 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (TableFun.getSelectedRow() != -1) {
 
-            txtMatricula.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 1).toString());
-            txtNome.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
-            txtCargo.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
-            txtSalario.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
-            txtSenha.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
+            txtMatricula.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 0).toString());
+            txtNome.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 1).toString());
+            txtCargo.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
+            txtSalario.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
+            txtSenha.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 4).toString());
 
         }
 
@@ -352,14 +375,19 @@ public class TelaCadastroFuncionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (TableFun.getSelectedRow() != -1) {
 
-            txtMatricula.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 1).toString());
-            txtNome.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
-            txtCargo.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
-            txtSalario.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
-            txtSenha.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
+            txtMatricula.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 0).toString());
+            txtNome.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 1).toString());
+            txtCargo.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 2).toString());
+            txtSalario.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 3).toString());
+            txtSenha.setText(TableFun.getValueAt(TableFun.getSelectedRow(), 4).toString());
 
         }
     }//GEN-LAST:event_TableFunKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -50,8 +50,6 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableListFun = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        ExcluiFuncionario = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setTitle("Mercearia GMW");
 
@@ -172,21 +170,7 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(TableListFun);
 
         jLabel1.setFont(new java.awt.Font("Constantia", 0, 15)); // NOI18N
-        jLabel1.setText("Gerenciamento de Funcionarios");
-
-        ExcluiFuncionario.setText("Excluir");
-        ExcluiFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExcluiFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Atualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Relação de Funcionarios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,12 +185,6 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(87, 87, 87)
-                .addComponent(ExcluiFuncionario)
-                .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
                 .addGap(360, 360, 360)
                 .addComponent(jLabel1)
@@ -232,13 +210,9 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ExcluiFuncionario)
-                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -266,25 +240,6 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TableListFunComponentAdded
 
-    private void ExcluiFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluiFuncionarioActionPerformed
-        // TODO add your handling code here:
-        
-        if(TableListFun.getSelectedRow() != -1){
-            
-            DefaultTableModel excluir = (DefaultTableModel)TableListFun.getModel();
-            excluir.removeRow(TableListFun.getSelectedRow());
-            JOptionPane.showMessageDialog(null,"Funcionario excluído com sucesso!");
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir!");
-        }
-    }//GEN-LAST:event_ExcluiFuncionarioActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void TableListFunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableListFunMouseClicked
         // TODO add your handling code here:
         if(TableListFun.getSelectedRow() != -1){
@@ -309,9 +264,7 @@ public class TelaListaFuncionario extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ExcluiFuncionario;
     private javax.swing.JTable TableListFun;
-    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JInternalFrame jInternalFrame3;

@@ -76,13 +76,11 @@ public class FuncionariosDAO {
         
        
         try {
-            statement = conexao.prepareStatement("UPDATE funcionarios SET Nome =? WHERE MATRICULA =?;\n" +
-                                                 "UPDATE funcionarios SET CARGO=? WHERE MATRICULA=?;\n" +
-                                                 "UPDATE funcionarios SET Salario =? WHERE MATRICULA =?");
-            statement.setString(1, f.getMatricula());
-            statement.setString(2, f.getNome());
-            statement.setString(3, f.getCargo());
-            statement.setFloat(4,f.getSalario() );
+            statement = conexao.prepareStatement("UPDATE funcionarios SET NOME = ?, CARGO = ?, SALARIO = ? WHERE MATRICULA = ?");
+            statement.setString(1, f.getNome());
+            statement.setString(2, f.getCargo());
+            statement.setFloat(3, f.getSalario() );
+            statement.setString(4, f.getMatricula());
             statement.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");

@@ -22,6 +22,9 @@ public class Produtos {
         this.departamento = departamento;
         this.preco = preco;
     }
+    public Produtos(){
+        
+    }
 
     //------------------------------------------ Fim Construtor ----------------------------------------------------//
 

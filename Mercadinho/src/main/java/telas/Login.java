@@ -81,7 +81,7 @@ public class Login extends javax.swing.JFrame {
         textLogin1.setFont(new java.awt.Font("Constantia", 0, 15)); // NOI18N
         textLogin1.setText("Senha");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\resid\\Documents\\gmw\\imagemGMW.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\resid\\Documents\\NetBeansProjects\\Projeto-Java-\\Mercadinho\\Resources\\Imagens\\imagemGMW.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
